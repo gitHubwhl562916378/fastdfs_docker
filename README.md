@@ -46,57 +46,57 @@ events {<br>
     use epoll;<br>
 }<br>
 ```
-http {<br>
-    include       mime.types;<br>
-    default_type  application/octet-stream;<br>
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '<br>
-    #                  '$status $body_bytes_sent "$http_referer" '<br>
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';<br>
-    #access_log  logs/access.log  main;<br>
-    sendfile       on;<br>
-    tcp_nopush     on;<br>
-    keepalive_timeout  65;<br>
-    #gzip on;<br>
-<br>
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+    #access_log  logs/access.log  main;
+    sendfile       on;
+    tcp_nopush     on;
+    keepalive_timeout  65;
+    #gzip on;
+
     #设置 group1 的服务器<br>
-    upstream fdfs_group1 {<br>
-         server 192.168.1.205:8888 weight=1 max_fails=2 fail_timeout=30s;<br>
-         server 192.168.1.206:8888 weight=1 max_fails=2 fail_timeout=30s;<br>
-    }<br>
-<br>
-    #设置 group2 的服务器<br>
-    upstream fdfs_group2 {<br>
-         server 192.168.1.207:8888 weight=1 max_fails=2 fail_timeout=30s;<br>
-         server 192.168.1.208:8888 weight=1 max_fails=2 fail_timeout=30s;<br>
-    }<br>
-<br>
-    server {<br>
-        listen       80;<br>
-        server_name  localhost;<br>
-        #charset koi8-r;<br>
-        #access_log  logs/host.access.log  main;<br>
-<br>
-        #设置 group 的负载均衡参数<br>
-        location /group1/M00 {<br>
-            proxy_set_header Host $host;<br>
-            proxy_set_header X-Real-IP $remote_addr;<br>
-            proxy_pass http://fdfs_group1;<br>
-        }<br>
-<br>
-        location /group2/M00 {<br>
-            proxy_set_header Host $host;<br>
-            proxy_set_header X-Real-IP $remote_addr;<br>
-            proxy_pass http://fdfs_group2;<br>
-        }<br>
-<br>
-        #error_page  404              /404.html;<br>
-        # redirect server error pages to the static page /50x.html<br>
-        #<br>
-        error_page   500 502 503 504  /50x.html;<br>
-        location = /50x.html {<br>
-            root html; <br>
-        }<br>
-    } <br>
-}<br>```
+    upstream fdfs_group1 {
+         server 192.168.1.205:8888 weight=1 max_fails=2 fail_timeout=30s;
+         server 192.168.1.206:8888 weight=1 max_fails=2 fail_timeout=30s;
+    }
+
+    #设置 group2 的服务器
+    upstream fdfs_group2 {
+         server 192.168.1.207:8888 weight=1 max_fails=2 fail_timeout=30s;
+         server 192.168.1.208:8888 weight=1 max_fails=2 fail_timeout=30s;
+    }
+
+    server {
+        listen       80;
+        server_name  localhost;
+        #charset koi8-r;
+        #access_log  logs/host.access.log  main;
+
+        #设置 group 的负载均衡参数
+        location /group1/M00 {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://fdfs_group1;
+        }
+
+        location /group2/M00 {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://fdfs_group2;
+        }
+
+        #error_page  404              /404.html;
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+}```
 
 5. [参考链接]](https://cloud.tencent.com/developer/article/1333007)
