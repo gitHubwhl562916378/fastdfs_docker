@@ -4,22 +4,26 @@ IMAGE_NAME=192.168.2.100:5000/common/fastdfs:latest
 #storage 只启动storage、nginx服务
 #默认启动单机布署
 EXCUTEABLE=tracker
-CONTAINER_NAME=fastdfs
+CONTAINER_NAME=tracker
 
 FastdfsConfig=$PWD/fdfs
 NginxConfig=$PWD/nginx/conf/nginx.conf
 NginxHtmlRoot=$PWD/nginx/html
 NginxLogs=$PWD/nginx/logs
-FastDataPath=$PWD/store_path
 
 start(){
+      if [ ! -d /home/fastdfs ]
+      then
+            mkdir /home/fastdfs
+      fi
+
     set -x
-    docker run --net=host --name=$CONTAINER_NAME -d --restart=always --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --privileged=true \
+    docker run --net=host --name=$CONTAINER_NAME -d --restart=always --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
     -v $FastdfsConfig:/etc/fdfs \
     -v $NginxConfig:/usr/local/nginx/conf/nginx.conf \
     -v $NginxHtmlRoot:/usr/local/nginx/html \
     -v $NginxLogs:/usr/local/nginx/logs \
-    -v $FastDataPath:/home/fastdfs \
+    -v /home/fastdfs:/home/fastdfs \
     $IMAGE_NAME \
     $EXCUTEABLE
 }

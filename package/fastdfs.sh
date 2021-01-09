@@ -10,23 +10,27 @@ FastdfsConfig=$PWD/fdfs
 NginxConfig=$PWD/nginx/conf/nginx.conf
 NginxHtmlRoot=$PWD/nginx/html
 NginxLogs=$PWD/nginx/logs
-FastDataPath=$PWD/store_path
 
-new_host=localhost
-old_host="10.10.1.88"
+new_host=你的ip
+old_host=10.10.1.88
 
 sed -i "s/$old_host/$new_host/g" fdfs/client.conf
 sed -i "s/$old_host/$new_host/g" fdfs/storage.conf
 sed -i "s/$old_host/$new_host/g" fdfs/mod_fastdfs.conf
 
 start(){
+      if [ ! -d /home/fastdfs ]
+      then
+            mkdir /home/fastdfs
+      fi
+
     set -x
-    docker run --net=host --name=$CONTAINER_NAME -d --restart=always --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --privileged=true \
+    docker run --net=host --name=$CONTAINER_NAME -d --restart=always --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
     -v $FastdfsConfig:/etc/fdfs \
     -v $NginxConfig:/usr/local/nginx/conf/nginx.conf \
     -v $NginxHtmlRoot:/usr/local/nginx/html \
     -v $NginxLogs:/usr/local/nginx/logs \
-    -v $FastDataPath:/home/fastdfs \
+    -v /home/fastdfs:/home/fastdfs \
     $IMAGE_NAME \
     $EXCUTEABLE
 }
