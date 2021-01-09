@@ -9,6 +9,7 @@
 ### 单机
 1. 将package目录放到目标服务器
 2. 将fastdfs.sh中的IMAGE_NAME改为你编译出来的镜像
+3. 从fdfs/storage.conf中找到tracker_server目前的地址, 在fastdfs.sh中将old_host设置成找出来的地址，new_host为目前你的机器地址
 3. `sh fastdfs.sh start`
 
 ### 集群
