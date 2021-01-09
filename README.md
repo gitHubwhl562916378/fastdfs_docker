@@ -37,8 +37,9 @@ storage_server_port=23000<br>
 store_path_count=1<br>
 store_path0=/home/fastdfs<br>
 然后将fastdfs_multi.sh中的EXCUTEABLE赋值为storage, 执行`sh fastdfs_multi.sh start`。这样就把这台机器添加到group1去了，nginx也启动好了。其它机器同样操作
+
 4. 对外提供服务的nginx, 在对外服务器的nginx.conf中配置类似下面 <br>
-user  root;<br>
+```user  root;<br>
 worker_processes  1;<br>
 events {<br>
     worker_connections  1024;<br>
@@ -95,6 +96,6 @@ http {<br>
             root html; <br>
         }<br>
     } <br>
-}<br>
+}<br>```
 
 5. [参考链接]](https://cloud.tencent.com/developer/article/1333007)
