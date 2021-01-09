@@ -6,16 +6,16 @@
 2. `docker build -f Dockerfile -t 你的镜像名:你的Tag .`
 
 ## 布署方法
-### 单机
+### 单机 [root 权限操作]
 1. 将package目录放到目标服务器
-2. 将fastdfs.sh中的IMAGE_NAME改为你编译出来的镜像
+2. `cd package`, 将fastdfs.sh中的IMAGE_NAME改为你编译出来的镜像
 3. 从fdfs/storage.conf中找到tracker_server目前的地址, 在fastdfs.sh中将old_host设置成找出来的地址，new_host为目前你的机器地址
 3. `sh fastdfs.sh start`
 
-### 集群
+### 集群 [root 权限操作]
 1. 将package目录放到每台服务器上
-2. 根据分配好的ip先启动tracker服务，tracker服务没啥配置的路径已经在脚本中映射好了。只需要在每台tracker机器上执行`sh fastdfs_multi.sh start`
-3. 启动storage服务,在storage目标机器上先为fdfs/storage.conf添加tracker地址和配置当前这台机器是哪个组, 如下面<br>
+2. `cd package`,根据分配好的ip先启动tracker服务，tracker服务没啥配置的路径已经在脚本中映射好了。只需要在每台tracker机器上执行`sh fastdfs_multi.sh start`
+3. `cd package`,启动storage服务,在storage目标机器上先为fdfs/storage.conf添加tracker地址和配置当前这台机器是哪个组, 如下面<br>
     tracker_server=192.168.1.210:22122<br>
     tracker_server=192.168.1.209:22122<br>
     group_name=group1<br>

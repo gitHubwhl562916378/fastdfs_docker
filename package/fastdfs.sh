@@ -11,7 +11,7 @@ NginxConfig=$PWD/nginx/conf/nginx.conf
 NginxHtmlRoot=$PWD/nginx/html
 NginxLogs=$PWD/nginx/logs
 
-new_host=你的ip
+new_host=10.10.1.88
 old_host=10.10.1.88
 
 sed -i "s/$old_host/$new_host/g" fdfs/client.conf
