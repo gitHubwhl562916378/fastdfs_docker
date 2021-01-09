@@ -41,11 +41,11 @@ store_path0=/home/fastdfs<br>
 4. 对外提供服务的nginx, 在对外服务器的nginx.conf中配置类似下面 <br>
 user  root;<br>
 worker_processes  1;<br>
-events {<br>
-    worker_connections  1024;<br>
-    use epoll;<br>
-}<br>
 ```
+events {
+    worker_connections  1024;
+    use epoll;
+}
 http {
     include       mime.types;
     default_type  application/octet-stream;
@@ -97,6 +97,6 @@ http {
             root html;
         }
     }
-}```
-
+}
+```
 5. [参考链接]](https://cloud.tencent.com/developer/article/1333007)
