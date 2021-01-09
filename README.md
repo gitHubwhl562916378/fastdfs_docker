@@ -46,8 +46,6 @@ events {
     worker_connections  1024;
     use epoll;
 }
-```
-```
 http {
     include       mime.types;
     default_type  application/octet-stream;
