@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-16 02:57:00
- * @LastEditTime: 2021-01-16 07:14:07
+ * @LastEditTime: 2021-01-16 07:24:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /docker_hub/fastdfs_docker/package/client_demo/main.cpp
@@ -10,7 +10,7 @@
 #include <fstream>
 #include <memory>
 #include <iterator>
-#include "FastDFSClient.h"
+#include "fastdfs_client.h"
 
 void TestUploadFile(FastDFSClient &fdfs_client)
 {

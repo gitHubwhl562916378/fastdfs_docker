@@ -7,7 +7,7 @@
  * @FilePath: /docker_hub/fastdfs_docker/package/client_demo/FastDFSClient.cpp
  */
 #include <assert.h>
-#include "FastDFSClient.h"
+#include "fastdfs_client.h"
 
 FastDFSClient::FastDFSClient(const std::string &cli_conf)
 {
