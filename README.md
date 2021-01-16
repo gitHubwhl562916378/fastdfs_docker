@@ -101,3 +101,7 @@ http {
 }
 ```
 5. [参考链接]](https://cloud.tencent.com/developer/article/1333007)
+
+## 客户端调用
+1. package/client_demo下有写好的样例
+2. client_demo使用g++ 7.3编译器，和前面Dockerfile中生成的镜像测试通过
